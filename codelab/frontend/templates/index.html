@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeLab — Huffman & Shannon-Fano</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-icon">⟨/⟩</div>
+    <div>
+      <div class="brand-name">CodeLab</div>
+      <div class="brand-sub">Huffman · Shannon-Fano · UTN FRLP</div>
+    </div>
+  </div>
+  <div class="top-tabs">
+    <button class="top-tab active" data-view="codificar">Codificar</button>
+    <button class="top-tab" data-view="historial">Historial</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ VISTA CODIFICAR -->
+<div id="view-codificar" class="view active">
+  <div class="layout">
+
+    <!-- Sidebar izquierdo -->
+    <div class="sidebar">
+      <div class="section-block">
+        <div class="section-label">Entrada de texto</div>
+        <textarea id="txt-input" placeholder="Escribí el texto a codificar...&#10;&#10;Ejemplo: hola mundo"></textarea>
+        <label class="file-btn">
+          <input type="file" id="file-input" accept=".txt" style="display:none">
+          ↑ Cargar archivo .txt
+        </label>
+        <div id="char-count" class="char-count">0 caracteres</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">Algoritmo</div>
+        <div class="algo-group">
+          <label class="algo-opt active" id="opt-huffman">
+            <input type="radio" name="algo" value="huffman" checked> Huffman
+          </label>
+          <label class="algo-opt" id="opt-sf">
+            <input type="radio" name="algo" value="shannon_fano"> Shannon-Fano
+          </label>
+          <label class="algo-opt" id="opt-ambos">
+            <input type="radio" name="algo" value="ambos"> Ambos
+          </label>
+        </div>
+      </div>
+
+      <button class="run-btn" id="btn-codificar">▶ Codificar</button>
+      <div id="error-msg" class="error-msg" style="display:none"></div>
+
+      <div class="section-block" id="freq-block" style="display:none">
+        <div class="section-label">Frecuencia de símbolos</div>
+        <div id="freq-list"></div>
+      </div>
+
+      <div class="section-block" id="metrics-block" style="display:none">
+        <div class="section-label">Métricas</div>
+        <div id="metrics-grid"></div>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main-content">
+      <div class="inner-tabs" id="inner-tabs" style="display:none">
+        <button class="inner-tab active" data-tab="arbol">Árbol</button>
+        <button class="inner-tab" data-tab="tabla">Tabla de códigos</button>
+        <button class="inner-tab" data-tab="salida">Salida binaria</button>
+        <button class="inner-tab" data-tab="grafico">Gráfico</button>
+        <button class="inner-tab" data-tab="decodificar">Decodificar</button>
+      </div>
+
+      <div id="empty-state" class="empty-state">
+        <div class="empty-icon">⟨/⟩</div>
+        <div class="empty-title">Ingresá un texto y hacé clic en Codificar</div>
+        <div class="empty-sub">Se construirá el árbol, la tabla de códigos y la salida binaria</div>
+      </div>
+
+      <!-- Tab árbol -->
+      <div id="tab-arbol" class="tab-panel" style="display:none">
+        <div id="arbol-container"></div>
+      </div>
+
+      <!-- Tab tabla -->
+      <div id="tab-tabla" class="tab-panel" style="display:none">
+        <div id="tabla-container"></div>
+      </div>
+
+      <!-- Tab salida -->
+      <div id="tab-salida" class="tab-panel" style="display:none">
+        <div id="salida-container"></div>
+      </div>
+
+      <!-- Tab gráfico -->
+      <div id="tab-grafico" class="tab-panel" style="display:none">
+        <div class="chart-wrap">
+          <div class="chart-title">Frecuencia por símbolo</div>
+          <canvas id="chart-freq" height="180"></canvas>
+        </div>
+        <div class="chart-wrap" id="chart-len-wrap" style="display:none">
+          <div class="chart-title">Longitud de código por símbolo</div>
+          <canvas id="chart-len" height="180"></canvas>
+        </div>
+      </div>
+
+      <!-- Tab decodificar -->
+      <div id="tab-decodificar" class="tab-panel" style="display:none">
+        <div id="decodificar-container"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ VISTA HISTORIAL -->
+<div id="view-historial" class="view" style="display:none">
+  <div class="historial-wrap">
+    <div class="historial-header">
+      <h2>Historial de codificaciones</h2>
+      <button class="run-btn" style="width:auto;padding:8px 18px" onclick="cargarHistorial()">↺ Actualizar</button>
+    </div>
+    <div id="historial-list"></div>
+  </div>
+</div>
+
+<script src="/static/js/main.js"></script>
+</body>
+</html>
