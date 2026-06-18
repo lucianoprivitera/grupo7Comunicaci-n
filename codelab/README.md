@@ -66,7 +66,7 @@ codelab/
 ### 1. Clonar o descomprimir el proyecto
 
 ```bash
-git clone <url-del-repo>
+git clone https://github.com/lucianoprivitera/grupo7Comunicaci-n
 cd codelab
 ```
 
