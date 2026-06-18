@@ -1,2 +1,1 @@
-# grupo7Comunicaci-n
-.
+
