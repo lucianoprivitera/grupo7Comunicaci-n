@@ -5,7 +5,7 @@
 
 ## Integrantes del Grupo 7
 
-(completar con los nombres del grupo)
+Taini Santino - Privitera Luciano - Tiziano Hurst - Nahuel Almeyda
 
 ---
 
